@@ -1,4 +1,6 @@
+const opn = require("opn");
 const express = require("express");
+
 const app = express();
 
 const Layout = require("@podium/layout");
@@ -48,5 +50,6 @@ app.get("/", async (req, res) => {
   `);
 });
 
-
 app.listen(7000);
+
+opn(`http://localhost:7000`);

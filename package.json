@@ -4,21 +4,23 @@
   "description": "demo of react micro frontends in a single page with podium",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "installAll": "(cd ./base-app && npm install) && (cd ./react-message-pod && npm i) && (cd ./svelte-message-pod && npm i) && (cd ./vue-message-pod && npm i)",
-    "startReactPod": "(cd ./react-message-pod && npm run build && node podlet.js)",
-    "startSveltePod": "(cd ./svelte-message-pod && npm run build && node podlet.js)",
-    "startVuePod": "(cd ./vue-message-pod && npm run build && node podlet.js)",
-    "startBaseApp": "(cd ./base-app && node layout.js)",
-    "start": "npm-run-all -p startReactPod startSveltePod startVuePod startBaseApp"
+    "install:react": "(cd ./react-message-pod && npm i)",
+    "start:react": "(cd ./react-message-pod && npm run build && node podlet.js)",
+    "install:svelte": "(cd ./svelte-message-pod && npm i)",
+    "start:svelte": "(cd ./svelte-message-pod && npm run build && node podlet.js)",
+    "start:vue": "(cd ./vue-message-pod && npm run build && node podlet.js)",
+    "install:vue": "(cd ./vue-message-pod && npm i)",
+    "start:base": "(cd ./base-app && node layout.js)",
+    "install:base": "(cd ./base-app && npm i)",
+    "preinstall": "npm-run-all -p install:*",
+    "start": "npm-run-all -p start:*"
   },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Jozzeh/podium-react-example/issues"
   },
   "homepage": "https://github.com/Jozzeh/podium-react-example#readme",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "npm-run-all": "^4.1.5"
   }
 }
