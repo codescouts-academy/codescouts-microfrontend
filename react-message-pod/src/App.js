@@ -5,29 +5,45 @@ import logo from "./logo.svg";
 
 import { MessageBus } from "@podium/browser";
 
-function App() {
+const useMessageBus = (appId, onMessage) => {
   const messageBus = new MessageBus();
-  const [messager, setMessage] = useState("");
 
-  messageBus.subscribe('internalchannel', 'newMessage', event => {
-    if(event.payload.from !== "react panel"){
-      setMessage(event.payload.message);
+  messageBus.subscribe("internalchannel", "newMessage", (event) => {
+    if (event.payload.from !== appId) {
+      onMessage(event.payload.message);
     }
   });
 
-  function handleChange(e) {
+  const sendMessage = (message) => {
     messageBus.publish("internalchannel", "newMessage", {
-      message: e.target.value,
-      from: "react panel",
+      message: message,
+      from: appId,
     });
-    setMessage(e.target.value);
-  }
 
-  // do not mind the ugly hack where the window location is replaced... 
-  // demo only
+    onMessage(message);
+  };
+
+  return { sendMessage, onMessage };
+};
+
+function App() {
+  const [messager, setMessage] = useState("");
+
+  const { sendMessage } = useMessageBus("react panel", (message) => {
+    setMessage(message);
+  });
+
+  const handleChange = (e) => {
+    sendMessage(e.target.value);
+  };
+
   return (
     <div className={styles.sendMessageApp}>
-      <img className={styles.sendMessageImage} src={window.location.origin.replace('7000', '7100') + logo} alt="react framework"/>
+      <img
+        className={styles.sendMessageImage}
+        src={window.location.origin.replace("7000", "7100") + logo}
+        alt="react framework"
+      />
       <br />
       Micro Frontend Sender
       <br />

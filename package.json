@@ -1,7 +1,7 @@
 {
-  "name": "podium-react",
+  "name": "CodeScouts-micro-frontends",
   "version": "1.0.0",
-  "description": "demo of react micro frontends in a single page with podium",
+  "description": "demo of React Svelte and Vue micro frontends in a single page with podium",
   "main": "index.js",
   "scripts": {
     "install:react": "(cd ./react-message-pod && npm i)",
@@ -16,10 +16,6 @@
     "start": "npm-run-all -p start:*"
   },
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Jozzeh/podium-react-example/issues"
-  },
-  "homepage": "https://github.com/Jozzeh/podium-react-example#readme",
   "dependencies": {
     "npm-run-all": "^4.1.5"
   }
